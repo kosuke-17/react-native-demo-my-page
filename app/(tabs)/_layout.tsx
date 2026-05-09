@@ -69,7 +69,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="design-system"
         options={{
           title: 'デザインシステム',
           tabBarLabel: 'デザインシステム',
