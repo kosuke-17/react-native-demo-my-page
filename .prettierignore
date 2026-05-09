@@ -1,0 +1,11 @@
+# Build / deps
+node_modules/
+.expo/
+dist/
+build/
+
+# Lockfile (optional: Prettier can format JSON but huge diffs)
+# package-lock.json
+
+# Generated
+*.snap
