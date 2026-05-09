@@ -1,15 +1,15 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
 
-import { topDesignTokens } from '@/features/top/constants/top-design-tokens';
+import { topDesignTokens } from '@/features/top/constants/top-design-tokens'
 
 type ProfileCardControlsProps = {
-  currentIndex: number;
-  totalCards: number;
-  disabled: boolean;
-  onPrevious: () => void;
-  onNext: () => void;
-};
+  currentIndex: number
+  totalCards: number
+  disabled: boolean
+  onPrevious: () => void
+  onNext: () => void
+}
 
 export function ProfileCardControls({
   currentIndex,
@@ -19,10 +19,10 @@ export function ProfileCardControls({
   onNext,
 }: ProfileCardControlsProps) {
   if (totalCards <= 1) {
-    return null;
+    return null
   }
 
-  const pageLabel = `${currentIndex + 1} / ${totalCards}`;
+  const pageLabel = `${currentIndex + 1} / ${totalCards}`
 
   return (
     <View style={styles.row}>
@@ -70,7 +70,7 @@ export function ProfileCardControls({
         />
       </Pressable>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    gap: topDesignTokens.spacing[4],
     marginTop: topDesignTokens.spacing[4],
   },
   navButton: {
@@ -104,4 +105,4 @@ const styles = StyleSheet.create({
     fontSize: topDesignTokens.fontSizes.base,
     fontVariant: ['tabular-nums'],
   },
-});
+})
