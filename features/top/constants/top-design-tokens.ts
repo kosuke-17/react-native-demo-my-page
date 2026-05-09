@@ -44,7 +44,6 @@ export const topDesignTokens = {
     profileCardMaxWidth: 512,
     profileCardMinHeight: 170,
     headerLogo: 40,
-    gridCell: 40,
   },
   layout: {
     profileBreakpointWidth: 768,
