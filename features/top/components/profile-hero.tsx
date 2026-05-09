@@ -1,34 +1,37 @@
-import { useCallback, useState } from 'react'
-import { Image, Platform, StyleSheet, useWindowDimensions, View } from 'react-native'
+import { useCallback, useState } from 'react';
+import { Image, Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
 
-import { ProfileCardControls } from '@/features/top/components/profile-card-controls'
-import { ProfileCardText } from '@/features/top/components/profile-card-text'
-import { profileCards, profileImageSource } from '@/features/top/constants/top-content'
-import { topDesignTokens } from '@/features/top/constants/top-design-tokens'
-import { useProfileCard } from '@/features/top/hooks/use-profile-card'
-import { useReducedMotion } from '@/features/top/hooks/use-reduced-motion'
+import { ProfileCardControls } from '@/features/top/components/profile-card-controls';
+import { ProfileCardText } from '@/features/top/components/profile-card-text';
+import { profileCards, profileImageSource } from '@/features/top/constants/top-content';
+import { topDesignTokens } from '@/features/top/constants/top-design-tokens';
+import { useProfileCard } from '@/features/top/hooks/use-profile-card';
+import { useReducedMotion } from '@/features/top/hooks/use-reduced-motion';
 
-const totalCards = profileCards.length
+const totalCards = profileCards.length;
 
 export function ProfileHero() {
-  const { width } = useWindowDimensions()
-  const reduceMotion = useReducedMotion()
-  const { currentIndex, goNext, goPrevious } = useProfileCard(totalCards)
-  const [isTyping, setIsTyping] = useState(false)
+  const { width } = useWindowDimensions();
+  const reduceMotion = useReducedMotion();
+  const { currentIndex, goNext, goPrevious } = useProfileCard(totalCards);
+  const [isTyping, setIsTyping] = useState(false);
 
   const handleTypingChange = useCallback((next: boolean) => {
-    setIsTyping(next)
-  }, [])
+    setIsTyping(next);
+  }, []);
 
   const profileImageSize =
     width >= topDesignTokens.layout.profileBreakpointWidth
       ? topDesignTokens.sizes.profileImageLg
-      : topDesignTokens.sizes.profileImageSm
+      : topDesignTokens.sizes.profileImageSm;
 
-  const cardWidth = Math.min(width - topDesignTokens.layout.horizontalPadding * 2, topDesignTokens.sizes.profileCardMaxWidth)
+  const cardWidth = Math.min(
+    width - topDesignTokens.layout.horizontalPadding * 2,
+    topDesignTokens.sizes.profileCardMaxWidth,
+  );
 
-  const currentCard = profileCards[currentIndex]
-  const borderRadius = profileImageSize / 2
+  const currentCard = profileCards[currentIndex];
+  const borderRadius = profileImageSize / 2;
 
   return (
     <View style={styles.hero}>
@@ -72,7 +75,7 @@ export function ProfileHero() {
         />
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -94,4 +97,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: topDesignTokens.spacing[6],
     paddingVertical: topDesignTokens.spacing[4],
   },
-})
+});

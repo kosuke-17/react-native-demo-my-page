@@ -133,16 +133,16 @@ MVP では Agent タブを持たず、プロフィール表示に必要な状態
 
 ```ts
 type ProfileState = {
-  currentIndex: number
-  isTyping: boolean
-}
+  currentIndex: number;
+  isTyping: boolean;
+};
 ```
 
 前後ナビゲーションは以下のループ式にする。
 
 ```ts
-const nextIndex = (currentIndex + 1) % totalCards
-const previousIndex = (currentIndex - 1 + totalCards) % totalCards
+const nextIndex = (currentIndex + 1) % totalCards;
+const previousIndex = (currentIndex - 1 + totalCards) % totalCards;
 ```
 
 ## Implementation Steps

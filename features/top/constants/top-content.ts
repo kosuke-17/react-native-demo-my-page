@@ -1,12 +1,12 @@
-import type { ImageSourcePropType } from 'react-native'
+import type { ImageSourcePropType } from 'react-native';
 
 export const headerContent = {
   title: 'タムサイト テックブログ',
-} as const
+} as const;
 
 export const creditContent = {
   label: 'Inspired by hey.milo.gg - Thank you!',
-} as const
+} as const;
 
 export const profileCards = [
   {
@@ -30,8 +30,7 @@ export const profileCards = [
   },
   {
     id: '4',
-    catchCopy:
-      '【趣味】サッカーが大好き。最近は町田ゼルビア推し。見るのもプレーするのも好き。',
+    catchCopy: '【趣味】サッカーが大好き。最近は町田ゼルビア推し。見るのもプレーするのも好き。',
   },
   {
     id: '5',
@@ -42,8 +41,9 @@ export const profileCards = [
     catchCopy:
       '【趣味】犬が好きで、特にしば犬とコーギーが好き。長崎のコーギーカフェまで行きました。',
   },
-] as const
+] as const;
 
-export type ProfileCard = (typeof profileCards)[number]
+export type ProfileCard = (typeof profileCards)[number];
 
-export const profileImageSource = require('../../../assets/images/my-picture.webp') as ImageSourcePropType
+export const profileImageSource =
+  require('../../../assets/images/my-picture.webp') as ImageSourcePropType;
