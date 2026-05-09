@@ -1,46 +1,60 @@
 ---
 name: public-repo-security-review
-description: Reviews current git changes and untracked files for risks before publishing to a public GitHub repository. Use only when explicitly requested for public repository security review.
+description: Reference knowledge for the public-repo-security-reviewer subagent. Provides review criteria for checking whether current changes are safe to publish to a public GitHub repository.
 disable-model-invocation: true
 ---
 
 # Public Repo Security Review
 
-## Scope
+## Purpose
 
-Review only the current git changes and untracked files unless the user asks for a broader repository review.
+This skill is supporting knowledge for the `public-repo-security-reviewer` subagent. It should not perform the review by itself.
 
-Focus on whether the changed source code, docs, config, and assets are safe to publish in a public GitHub repository.
+Use this as the checklist of risks, judgment criteria, and reporting expectations when a subagent reviews whether current git changes and untracked files are safe to publish in a public GitHub repository.
 
-## Workflow
+## Review Scope
 
-1. Inspect changed files:
-   - Run `git status --short`.
-   - Run `git diff --stat`.
-   - Run `git diff`.
-   - Include untracked files in the review.
-2. Search changed paths for likely secrets:
-   - API keys, access tokens, bearer tokens, private keys, passwords, credentials, database URLs, service account JSON, cloud keys, OAuth client secrets.
-   - Common prefixes such as `ghp_`, `github_pat`, `sk-`, `AKIA`, `AIza`, and PEM blocks.
-3. Check local environment and key material exposure:
-   - Flag `.env`, `.env.*`, credential files, signing keys, certificates, provisioning profiles, keystores, and service account files.
-   - Verify `.gitignore` protects common secret and generated native files.
-4. Review personal information and privacy:
-   - Treat real names, face photos, addresses, phone numbers, email addresses, SNS accounts, employment details, location clues, and detailed personal profiles as blocker candidates.
-   - Distinguish between "secret leakage" and "public-by-intent personal information", but still ask for explicit confirmation before marking safe.
-5. Review image and media assets:
-   - Identify newly added images or media.
-   - Check metadata where practical, especially EXIF, XMP, GPS, camera/device information, and embedded comments.
-   - For WebP, inspect RIFF chunks and flag `EXIF` or `XMP ` chunks if present.
-6. Review docs and planning files:
-   - Look for internal URLs, private project names, unreleased plans, private architecture notes, customer names, credentials, and operational details.
-7. Review dependency risk:
-   - For npm projects, run `npm audit --omit=dev --json` when network access is available.
-   - Report vulnerability severity and whether it affects public source publication or runtime security.
+- Review changed source code, docs, config, generated files, and assets.
+- Include untracked files in the security review.
+- Limit the review to current git changes unless the user asks for a broader repository audit.
+
+## Risk Areas
+
+### Secrets
+
+Flag API keys, access tokens, bearer tokens, private keys, passwords, credentials, database URLs, service account JSON, cloud keys, OAuth client secrets, and signing material.
+
+Common indicators include `ghp_`, `github_pat`, `sk-`, `AKIA`, `AIza`, PEM blocks, JWT-looking strings, connection strings, and credential-like JSON fields.
+
+### Environment And Key Material
+
+Flag `.env`, `.env.*`, credential files, signing keys, certificates, provisioning profiles, keystores, private profiles, and service account files.
+
+Check whether `.gitignore` protects common local secret files, generated native build outputs, and platform-specific signing artifacts.
+
+### Personal Information And Privacy
+
+Treat real names, face photos, addresses, phone numbers, email addresses, SNS accounts, employment details, location clues, and detailed personal profiles as blocker candidates.
+
+Distinguish between secret leakage and public-by-intent personal information, but require explicit user confirmation before marking public personal data as safe.
+
+### Image And Media Metadata
+
+Newly added image or media assets can expose metadata. Check metadata where practical, especially EXIF, XMP, GPS, camera/device information, and embedded comments.
+
+For WebP, inspect RIFF chunks and flag `EXIF` or `XMP ` chunks when present.
+
+### Docs And Planning Files
+
+Look for internal URLs, private project names, unreleased plans, private architecture notes, customer names, credentials, operational details, and private AI-agent instructions.
+
+### Dependencies
+
+For npm projects, dependency vulnerabilities usually do not block publishing source code by themselves, but runtime-impacting vulnerabilities should be reported.
 
 ## Output Format
 
-Use this checklist format:
+The subagent should report in this checklist format:
 
 ```markdown
 ## Public Repository Review
